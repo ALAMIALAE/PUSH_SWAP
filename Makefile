@@ -26,9 +26,6 @@ all: $(NAME)
 
 bonus: $(NAME_BONUS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
 	$(RM) $(OBJS) $(BONUS_OBJS)
 

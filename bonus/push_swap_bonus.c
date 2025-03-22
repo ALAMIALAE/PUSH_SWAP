@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:17:40 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/20 23:38:56 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/22 09:09:42 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-void	msg_error(char *err, t_stack **a, t_stack **b)
+void	msg_error(char *err, t_stack *a, t_stack *b)
 {
-	write(1, "error\n", 6);
-	if (err)
-	{
-		free(err);
-		err = NULL;
-	}
-	free_l(*a);
-	free_l(*b);
+	write(2, "Error\n", 6);
+	free(err);
+	free_l(a);
+	free_l(b);
 	exit(1);
 }
 
@@ -62,14 +58,13 @@ void	ft_checker(char *line, t_stack **a, t_stack **b)
 	else if (ft_strcmp(line, "rrr\n") == 0)
 		ft_rrr(a, b);
 	else
-	{
-		free(line);
-		msg_error(line, a, b);
-	}
+		msg_error(line, *a, *b);
 }
 
 int	already_sorted(t_stack *a)
 {
+	while(!a)
+		return (0);
 	while (a->next)
 	{
 		if (a->content > a->next->content)
@@ -91,11 +86,18 @@ int	main(int ac, char **av)
 		return (0);
 	parse(ac, av, &a);
 	line = get_next_line(0);
+	if(!line)
+	{
+		write(2, "Error\n", 6);
+		free_l(a);
+			free_l(b);
+
+	}
 	while (line)
 	{
 		ft_checker(line, &a, &b);
-		free(line);
 		line = get_next_line(0);
+		free(line);
 	}
 	free(line);
 	if (already_sorted(a) && b == NULL)
