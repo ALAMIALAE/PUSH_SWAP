@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 16:08:36 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/02/28 14:48:23 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:22:33 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	rotating_stack(t_stack **b, int max_value, int half, int max_index)
 			ft_rrb(b);
 	}
 }
+
 int	get_index(t_stack *a, int value)
 {
 	int	index;

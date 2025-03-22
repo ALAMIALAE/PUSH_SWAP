@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 14:17:02 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/02/28 15:45:13 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:14:03 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void				range_algo(int *start, int *end, int size);
 void				free_l(t_stack *a);
 int					limit_int(char *str);
 int					get_index(t_stack *a, int value);
+void				stack_add(t_stack **a, t_stack *new);
+int					ft_dup(t_stack *a, int o);
 #endif

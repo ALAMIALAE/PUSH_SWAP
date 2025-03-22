@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -rf
 
 NAME = push_swap
@@ -7,11 +7,11 @@ NAME_BONUS = checker
 
 SRCS = push_swap.c ft_split.c push.c \
 	rotate.c swap.c reverse_rotate.c sort.c sort_utils.c \
-	algo.c algo_utils.c parse.c parsing_utils.c
+	algo.c algo_utils.c parse.c parsing_utils1.c parsing_utils2.c
 
-BONUS_SRCS = bonus/parse_bonus.c	bonus/parsing_utils_bonus.c	bonus/split_bonus.c	bonus/push_swap_bonus.c \
+BONUS_SRCS = bonus/parse_bonus.c	bonus/parsing_utils1_bonus.c	bonus/split_bonus.c	bonus/push_swap_bonus.c \
 	bonus/get_next_line_utils.c	bonus/get_next_line.c	bonus/swap_bonus.c	bonus/rotate_bonus.c \
-	bonus/reverse_rotate_bonus.c	bonus/push_bonus.c
+	bonus/reverse_rotate_bonus.c	bonus/push_bonus.c	bonus/parsing_utils2_bonus.c 
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
@@ -36,3 +36,5 @@ fclean: clean
 	$(RM) $(NAME) $(NAME_BONUS)
 
 re: fclean all
+
+.PHONY: all clean fclean re bonus

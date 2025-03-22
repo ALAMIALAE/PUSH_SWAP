@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:19:07 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/03 23:54:43 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:59:22 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-#define BUFFER_SIZE 42
+# define BUFFER_SIZE 42
 
 char				**ft_split(char const *s, char c);
 long				ft_atoi(const char *str);
@@ -65,14 +65,16 @@ void				range_algo(int *start, int *end, int size);
 void				free_l(t_stack *a);
 int					limit_int(char *str);
 int					get_index(t_stack *a, int value);
-char	*get_next_line(int fd);
-char	*ft_reading_line(int fd, char *buff);
-char	*ft_getting_line(char *buff);
-char	*ft_next_line(char *buff);
-char	*concatenate(char *s1, char *s2, char *s3);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strchr(const char *str, int c);
-size_t	ft_strlen(const char *str);
-int		ft_strcmp(char *s1, char *s2);
+void				stack_add(t_stack **a, t_stack *new);
+int					ft_dup(t_stack *a, int o);
+char				*get_next_line(int fd);
+char				*ft_reading_line(int fd, char *buff);
+char				*ft_getting_line(char *buff);
+char				*ft_next_line(char *buff);
+char				*concatenate(char *s1, char *s2, char *s3);
+char				*ft_strjoin(char *s1, char *s2);
+char				*ft_strchr(const char *str, int c);
+size_t				ft_strlen(const char *str);
+int					ft_strcmp(char *s1, char *s2);
 
 #endif

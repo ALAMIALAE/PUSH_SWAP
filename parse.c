@@ -6,135 +6,70 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:28 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/02/28 18:24:04 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/21 22:15:37 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_digit(char *str)
+void	handling_errors(char **res, t_stack **a)
 {
-	int	i;
-
-	i = 0;
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	if (i == 0 || (i == 1 && (str[0] == '+' || str[0] == '-')))
-		return (0);
-	return (1);
-}
-int	ft_dup(t_stack *a, int o)
-{
-	while (a)
-	{
-		if (a->content == o)
-			return (0);
-		else
-			a = a->next;
-	}
-	return (1);
+	if (res)
+		free_s(res);
+	if (a && *a)
+		free_l(*a);
+	write(2, "Error\n", 6);
+	exit(1);
 }
 
-void	stack_add(t_stack **a, t_stack *new)
-{
-	t_stack	*current;
 
-	if (!new)
-		return ;
-	if (!*a)
-	{
-		*a = new;
-		return ;
-	}
-	current = *a;
-	while (current->next)
-		current = current->next;
-	current->next = new;
+long	validating_converting(char *str, t_stack **a, char **res)
+{
+	long	num;
+
+	if (!is_digit(str))
+		handling_errors(res, a);
+	num = ft_atoi(str);
+	if (num == 2147483648)
+		handling_errors(res, a);
+	if (num > INT_MAX || num < INT_MIN)
+		handling_errors(res, a);
+	if (!ft_dup(*a, num))
+		handling_errors(res, a);
+	return (num);
 }
 
-void	free_s(char **res)
+void	process(char *element, t_stack **a, char **res)
 {
-	int	i;
-
-	i = 0;
-	while (res[i])
-	{
-		free(res[i]);
-		i++;
-	}
-	free(res);
-}
-
-void	free_l(t_stack *a)
-{
+	long	num;
 	t_stack	*tmp;
 
-	while (a)
-	{
-		tmp = a;
-		a = a->next;
-		free(tmp);
-	}
+	num = validating_converting(element, a, res);
+	tmp = ft_lstnew((int)num);
+	if (!tmp)
+		handling_errors(res, a);
+	stack_add(a, tmp);
 }
+
 void	parse(int ac, char **av, t_stack **a)
 {
-	char **res;
-	int i = 1;
-	int k;
-	int j = 0;
-	t_stack *tmp = NULL;
+	char	**res;
+	int		i;
+	int		j;
+
+	i = 1;
 	while (i < ac)
 	{
 		res = ft_split(av[i], ' ');
 		if (!res || !*res)
 		{
-			free_s(res);
-			free_l(*a);
-			write(2, "Error\n", 6);
-			exit(1);
+			if (res)
+				free_s(res);
+			handling_errors(NULL, a);
 		}
 		j = 0;
 		while (res[j])
-		{
-			if (!is_digit(res[j]))
-			{
-				free_s(res);
-				free_l(*a);
-				write(2, "Error\n", 6);
-				exit(1);
-			}
-			k = ft_atoi(res[j]);
-			if (limit_int(res[j]))
-			{
-				free_s(res);
-				free_l(*a);
-				write(2, "Error\n", 6);
-				exit(1);
-			}
-			if (!ft_dup(*a, k))
-			{
-				free_s(res);
-				free_l(*a);
-				write(2, "Error\n", 6);
-				exit(1);
-			}
-			tmp = ft_lstnew(k);
-			if (!tmp)
-			{
-				free_s(res);
-				free_l(*a);
-				write(2, "Error\n", 6);
-				exit(1);
-			}
-			stack_add(a, tmp);
-			j++;
-		}
+			process(res[j++], a, res);
 		free_s(res);
 		i++;
 	}

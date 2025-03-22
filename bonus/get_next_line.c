@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:41:42 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/04 00:38:04 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:17:29 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_getting_line(buff);
 	buff = ft_next_line(buff);
-    
-
-    
 	return (line);
 }

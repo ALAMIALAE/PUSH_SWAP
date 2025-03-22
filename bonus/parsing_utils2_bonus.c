@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils_bonus.c                              :+:      :+:    :+:   */
+/*   parsing_utils2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 23:20:41 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/03 23:21:00 by aben-dri         ###   ########.fr       */
+/*   Created: 2025/03/21 16:57:21 by aben-dri          #+#    #+#             */
+/*   Updated: 2025/03/21 17:23:15 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,33 @@ t_stack	*ft_lstnew(int content)
 	return (new_node);
 }
 
-int	limit_int(char *str)
+void	stack_add(t_stack **a, t_stack *new)
 {
-	long	result;
+	t_stack	*current;
 
-	result = ft_atoi(str);
-	if (result < INT_MIN || result > INT_MAX)
-		return (1);
-	return (0);
+	if (!new)
+		return ;
+	if (!*a)
+	{
+		*a = new;
+		return ;
+	}
+	current = *a;
+	while (current->next)
+		current = current->next;
+	current->next = new;
+}
+
+int	ft_dup(t_stack *a, int o)
+{
+	while (a)
+	{
+		if (a->content == o)
+			return (0);
+		else
+			a = a->next;
+	}
+	return (1);
 }
 
 long	ft_atoi(const char *str)
@@ -44,18 +63,19 @@ long	ft_atoi(const char *str)
 	result = 0;
 	i = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-	{
 		i++;
-	}
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
-			sign = sign * (-1);
+			sign = -1;
 		i++;
 	}
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = (result * 10) + (str[i] - '0');
+		result = result * 10 + (str[i] - '0');
+		if ((sign == 1 && result > INT_MAX)
+			|| (sign == -1 && - result < INT_MIN))
+			return (2147483648);
 		i++;
 	}
 	return (result * sign);

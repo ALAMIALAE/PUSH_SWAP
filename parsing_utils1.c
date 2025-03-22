@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 14:15:31 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/02/28 18:23:55 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/21 21:42:33 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_stack	*ft_lstnew(int content)
-{
-	t_stack	*new_node;
-
-	new_node = malloc(sizeof(t_stack));
-	if (!new_node)
-		return (NULL);
-	new_node->content = content;
-	new_node->next = NULL;
-	return (new_node);
-}
 
 int	limit_int(char *str)
 {
@@ -34,29 +22,48 @@ int	limit_int(char *str)
 	return (0);
 }
 
-long	ft_atoi(const char *str)
+int	is_digit(char *str)
 {
-	long	result;
-	int		sign;
-	int		i;
+	int	i;
 
-	sign = 1;
-	result = 0;
 	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-	{
-		i++;
-	}
 	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i])
 	{
-		if (str[i] == '-')
-			sign = sign * (-1);
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
 		i++;
 	}
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	if (i == 0 || (i == 1 && (str[0] == '+' || str[0] == '-')))
+		return (0);
+	return (1);
+}
+
+void	free_s(char **res)
+{
+	int	i;
+
+	if (!res)
+		return;
+	i = 0;
+	while (res[i])
 	{
-		result = (result * 10) + (str[i] - '0');
+		free(res[i]);
 		i++;
 	}
-	return (result * sign);
+	free(res);
+}
+
+
+void	free_l(t_stack *a)
+{
+	t_stack	*tmp;
+
+	while (a)
+	{
+		tmp = a;
+		a = a->next;
+		free(tmp);
+	}
 }

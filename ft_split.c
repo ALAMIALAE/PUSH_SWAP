@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 15:43:22 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/02/28 13:28:35 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/21 22:05:58 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	count_words(char const *s, char c)
 	int	count;
 	int	in_word;
 
+	if (!s || !*s)
+		return (0);
 	i = 0;
 	count = 0;
 	in_word = 0;
@@ -84,8 +86,8 @@ static int	first_split(char **str, char const *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char **strs;
-	int i;
+	int		i;
+	char	**strs;
 
 	if (s == NULL)
 		return (NULL);

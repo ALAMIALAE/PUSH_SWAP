@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:29:08 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/03 23:29:50 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:37:28 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ static int	first_split(char **str, char const *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char **strs;
-	int i;
+	int		i;
+	char	**strs;
 
 	if (s == NULL)
 		return (NULL);
