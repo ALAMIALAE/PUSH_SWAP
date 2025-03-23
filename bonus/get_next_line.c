@@ -6,11 +6,12 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:41:42 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/23 00:41:08 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:22:41 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
+
 char	*ft_next_line(char *buff)
 {
 	int		i;
@@ -29,10 +30,7 @@ char	*ft_next_line(char *buff)
 	}
 	next = malloc(ft_strlen(buff) - i + 1);
 	if (!next)
-	{
-		free(buff); // Free buff if malloc fails
 		return (NULL);
-	}
 	i = i + 1;
 	j = 0;
 	while (buff[i])
@@ -84,19 +82,11 @@ char	*ft_reading_line(int fd, char *buff)
 	{
 		line = read(fd, str, BUFFER_SIZE);
 		if (line == -1)
-		{
-			free(str);
-			free(buff);
-			return (NULL);
-		}
+			return (free(str), free(buff), NULL);
 		str[line] = '\0';
 		buff = ft_strjoin(buff, str);
-		if(!buff)
-		{
-			free(str);
-			free(buff);
-			return NULL;
-		}
+		if (!buff)
+			return (free(str), free(buff), NULL);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
@@ -115,8 +105,8 @@ char	*get_next_line(int fd)
 	if (!buff)
 		return (NULL);
 	line = ft_getting_line(buff);
-	if(!line)
-		return NULL;
+	if (!line)
+		return (NULL);
 	buff = ft_next_line(buff);
 	return (line);
 }

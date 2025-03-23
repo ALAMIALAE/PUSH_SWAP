@@ -6,24 +6,11 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:17:40 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/23 00:42:31 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 17:34:59 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-	{
-		i++;
-	}
-	return (s1[i] - s2[i]);
-}
 
 void	msg_error(char *err, t_stack *a, t_stack *b)
 {
@@ -65,7 +52,7 @@ void	ft_checker(char *line, t_stack **a, t_stack **b)
 
 int	already_sorted(t_stack *a)
 {
-	while(!a)
+	while (!a)
 		return (0);
 	while (a->next)
 	{
@@ -74,6 +61,16 @@ int	already_sorted(t_stack *a)
 		a = a->next;
 	}
 	return (1);
+}
+
+void	last_check(t_stack *a, t_stack *b)
+{
+	if (already_sorted(a) && b == NULL)
+		write(1, "ok\n", 3);
+	else
+		write(1, "ko\n", 3);
+	free_l(a);
+	free_l(b);
 }
 
 int	main(int ac, char **av)
@@ -88,11 +85,10 @@ int	main(int ac, char **av)
 		return (0);
 	parse(ac, av, &a);
 	line = get_next_line(0);
-	if(!line)
+	if (!line)
 	{
 		write(2, "Error\n", 6);
-		free_l(a);
-		free_l(b);
+		return (free_l(a), free(b), 0);
 	}
 	while (line)
 	{
@@ -102,10 +98,6 @@ int	main(int ac, char **av)
 	}
 	free(line);
 	get_next_line(-1);
-	if (already_sorted(a) && b == NULL)
-		write(1, "ok\n", 3);
-	else
-		write(1, "ko\n", 3);
-	free_l(a);
-	free_l(b);
+	last_check(a, b);
+	return (0);
 }
