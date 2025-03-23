@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:45:28 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/21 22:15:37 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:55:07 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	handling_errors(char **res, t_stack **a)
 	write(2, "Error\n", 6);
 	exit(1);
 }
-
 
 long	validating_converting(char *str, t_stack **a, char **res)
 {

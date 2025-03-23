@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 00:24:22 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/20 23:37:56 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:51:42 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_rotate(t_stack **lst)
 	t_stack	*first;
 	t_stack	*last;
 
-	if (!lst || !(*lst)->next)
+	if (!lst || !*lst || !(*lst)->next)
 		return ;
 	first = *lst;
 	last = *lst;

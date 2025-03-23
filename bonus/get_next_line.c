@@ -6,12 +6,11 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:41:42 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/20 23:17:29 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:41:08 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
-
 char	*ft_next_line(char *buff)
 {
 	int		i;
@@ -30,7 +29,10 @@ char	*ft_next_line(char *buff)
 	}
 	next = malloc(ft_strlen(buff) - i + 1);
 	if (!next)
+	{
+		free(buff); // Free buff if malloc fails
 		return (NULL);
+	}
 	i = i + 1;
 	j = 0;
 	while (buff[i])
@@ -46,9 +48,9 @@ char	*ft_getting_line(char *buff)
 	char	*str;
 
 	i = 0;
-	if (!*buff)
+	if (!buff || !*buff)
 		return (NULL);
-	while (buff[i] != '\0')
+	while (buff[i] != '\0' && buff[i] != '\n')
 		i++;
 	if (buff[i] == '\n')
 		i++;
@@ -82,13 +84,24 @@ char	*ft_reading_line(int fd, char *buff)
 	{
 		line = read(fd, str, BUFFER_SIZE);
 		if (line == -1)
-			return (free(str), free(buff), NULL);
+		{
+			free(str);
+			free(buff);
+			return (NULL);
+		}
 		str[line] = '\0';
 		buff = ft_strjoin(buff, str);
+		if(!buff)
+		{
+			free(str);
+			free(buff);
+			return NULL;
+		}
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
-	return (free(str), buff);
+	free(str);
+	return (buff);
 }
 
 char	*get_next_line(int fd)
@@ -97,11 +110,13 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (free(buff), NULL);
 	buff = ft_reading_line(fd, buff);
 	if (!buff)
 		return (NULL);
 	line = ft_getting_line(buff);
+	if(!line)
+		return NULL;
 	buff = ft_next_line(buff);
 	return (line);
 }

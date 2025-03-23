@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:44:14 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/20 23:41:54 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:06:55 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	if (!str)
+	
 		return (0);
 	while (str[i])
 		i++;

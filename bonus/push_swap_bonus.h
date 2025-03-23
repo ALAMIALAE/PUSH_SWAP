@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:19:07 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/21 16:59:22 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:21:52 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1
 
 char				**ft_split(char const *s, char c);
 long				ft_atoi(const char *str);

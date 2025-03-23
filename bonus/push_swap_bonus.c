@@ -6,11 +6,12 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:17:40 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/22 09:09:42 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:42:31 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
+
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -30,6 +31,7 @@ void	msg_error(char *err, t_stack *a, t_stack *b)
 	free(err);
 	free_l(a);
 	free_l(b);
+	get_next_line(-1);
 	exit(1);
 }
 
@@ -90,16 +92,16 @@ int	main(int ac, char **av)
 	{
 		write(2, "Error\n", 6);
 		free_l(a);
-			free_l(b);
-
+		free_l(b);
 	}
 	while (line)
 	{
 		ft_checker(line, &a, &b);
-		line = get_next_line(0);
 		free(line);
+		line = get_next_line(0);
 	}
 	free(line);
+	get_next_line(-1);
 	if (already_sorted(a) && b == NULL)
 		write(1, "ok\n", 3);
 	else

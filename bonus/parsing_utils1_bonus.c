@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:20:41 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/21 21:48:58 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:56:05 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_s(char **res)
 	int	i;
 
 	if (!res)
-		return;
+		return ;
 	i = 0;
 	while (res[i])
 	{
@@ -54,7 +54,6 @@ void	free_s(char **res)
 	}
 	free(res);
 }
-
 
 void	free_l(t_stack *a)
 {

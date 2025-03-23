@@ -6,7 +6,7 @@
 /*   By: aben-dri <aben-dri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 10:01:20 by aben-dri          #+#    #+#             */
-/*   Updated: 2025/03/20 23:22:56 by aben-dri         ###   ########.fr       */
+/*   Updated: 2025/03/23 01:22:41 by aben-dri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	range_values(int len, int *end)
 	if (len > 5 && len <= 100)
 		*end = len / 6;
 	else
-		*end = 40;
+		*end = 35;
 }
 
 void	sorting_helper(t_stack **a, t_stack **b, int len, int *arr)
